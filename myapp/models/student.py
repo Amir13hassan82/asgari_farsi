@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django import forms
 from myapp.enums import Gender, Degree, Term
+from .universitymodel import UniversityClass
+
+__all__ = ("Student",)
 
 
 class Student(models.Model):
@@ -12,11 +15,12 @@ class Student(models.Model):
     age = models.PositiveIntegerField()
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=11, unique=True)
-    birth_date = models.DateField(default=timezone.now())
+    birth_date = models.DateField(default=timezone.now)
     address = models.TextField()
     Gender = models.CharField(max_length=1, choices=Gender.choices, default=Gender.MALE)
     degree = models.CharField(max_length=1, choices=Degree.choices, default=Degree.FRESHMAN)
     term = models.CharField(max_length=2, choices=Term.choices, default=Term.ONE)
+    university = models.ForeignKey(UniversityClass, on_delete=models.CASCADE, related_name='+')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

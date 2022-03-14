@@ -3,6 +3,8 @@ from .student import Student
 from .course import Course
 from .teacher import Teacher
 
+__all__ = ("StudentTeacher", "TeacherCourse", "StudentCourse")
+
 
 class StudentTeacher(models.Model):
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)

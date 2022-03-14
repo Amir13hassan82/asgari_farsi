@@ -3,6 +3,8 @@ from django import forms
 from django.utils import timezone
 from myapp.enums import Gender, Degree, EmploymentStatus
 
+__all__ = ("Teacher",)
+
 
 class Teacher(models.Model):
     first_name = models.CharField(max_length=285)
@@ -12,7 +14,7 @@ class Teacher(models.Model):
     age = models.PositiveIntegerField()
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=11, unique=True)
-    birth_date = models.DateField(default=timezone.now())
+    birth_date = models.DateField(default=timezone.now)
     address = models.TextField()
     Gender = models.CharField(max_length=1, choices=Gender.choices, default=Gender.MALE)
     degree = models.CharField(max_length=1, choices=Degree.choices, default=Degree.MASTER)

@@ -5,6 +5,8 @@ from myapp.enums import Gender, Degree
 from .department import Department
 from .course import Course
 
+__all__ = ("ManagerGroup",)
+
 
 class ManagerGroup(models.Model):
     first_name = models.CharField(max_length=285)
@@ -14,12 +16,12 @@ class ManagerGroup(models.Model):
     age = models.PositiveIntegerField()
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=11, unique=True)
-    birth_date = models.DateField(default=timezone.now())
+    birth_date = models.DateField(default=timezone.now)
     address = models.TextField()
     Gender = models.CharField(max_length=1, choices=Gender.choices, default=Gender.MALE)
     degree = models.CharField(max_length=1, choices=Degree.choices, default=Degree.MASTER)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='+')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='+')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
